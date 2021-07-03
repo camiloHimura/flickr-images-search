@@ -39,6 +39,8 @@ describe('Img', () => {
 function setUp(props = {}) {
   const initialProps = {
     src: '',
+    alt: 'test',
+    onClick: () => ({}),
     ...props,
   };
 

@@ -1,34 +1,27 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, { useState } from 'react';
 import Img from '../Img';
-import * as R from 'ramda';
 
 import './Card.css';
 import iPhoto from '../../interfaces/iPhoto';
+import Modal from '../Modal';
 
-interface InitialProps {
-  onClick: (img: HTMLImageElement) => void;
-}
+type Props = iPhoto;
 
-type Props = InitialProps & iPhoto;
-
-const isImg = R.pathEq(['target', 'tagName'], 'IMG');
-
-const Card: React.FC<Props> = ({ title, onClick, id, secret, server }) => {
-  const getClidImg: React.MouseEventHandler<HTMLDivElement> = R.when(
-    isImg,
-    R.useWith(onClick, [R.path(['target'])]),
-  );
+const Card: React.FC<Props> = ({ title, id, secret, server }) => {
+  const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="card" onClick={getClidImg}>
+    <div className="card">
       <Img
         alt={title}
         data-test="img"
-        src={`https://live.staticflickr.com/${server}/${id}_${secret}.jpg`}
+        onClick={() => setShowModal(true)}
+        src={`https://live.staticflickr.com/${server}/${id}_${secret}_q.jpg`}
       />
       <h3 className="card-title">{title}</h3>
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
+        <div>Modal test</div>
+      </Modal>
     </div>
   );
 };

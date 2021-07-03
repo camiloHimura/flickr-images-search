@@ -25,10 +25,7 @@ const Content: React.FC = () => {
       <div className="content-cards">
         {isLoading && CardsLoading(9)}
 
-        {Utils.isNotNil(data) &&
-          data.photo.map((pto) => (
-            <Card key={pto.id} onClick={(data) => console.log('clicking img', data)} {...pto} />
-          ))}
+        {Utils.isNotNil(data) && data.photo.map((pto) => <Card key={pto.id} {...pto} />)}
       </div>
     </section>
   );

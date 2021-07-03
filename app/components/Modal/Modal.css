@@ -1,4 +1,4 @@
-.modal{
+.modal {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -10,16 +10,16 @@
   background: #0477bf66;
 }
 
-.modal .body{
+.modal .body {
   position: relative;
-  padding: var(--gPadding);
+  padding: var(--gap);
   background: var(--white);
   width: var(--modal-container-width);
 }
 
-.modal .close{
+.modal .close {
   color: var(--black);
   position: absolute;
-  top: calc(var(--gPadding) / 2);
-  right: calc(var(--gPadding) / 2);
+  top: calc(var(--gap) / 2);
+  right: calc(var(--gap) / 2);
 }

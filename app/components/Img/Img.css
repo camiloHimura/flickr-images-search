@@ -10,7 +10,7 @@
   transition: opacity 400ms ease 0ms;
 }
 
-.contImg img.loaded {
+.contImg .loaded img {
   opacity: 1;
 }
 

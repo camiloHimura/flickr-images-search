@@ -1,5 +1,5 @@
 .card {
-  --num-cards: 3;
+  --num-cards: 4;
   --icon-size: 18px;
   --cards-margin: var(--gap);
   --elemts-margin-top: var(--gap);

@@ -5,9 +5,10 @@ import './Img.css';
 interface Props {
   alt: string;
   src: string;
+  onClick: () => void;
 }
 
-const Img: React.FC<Props> = ({ src, alt }) => {
+const Img: React.FC<Props> = ({ src, alt, onClick }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [aspectRatio, setAspectRatio] = React.useState('80px');
 
@@ -23,7 +24,9 @@ const Img: React.FC<Props> = ({ src, alt }) => {
   return (
     <div className="contImg" style={{ paddingBottom: aspectRatio, width: '100%' }}>
       {!isLoaded && <Loader data-test="loader" className="loader" />}
-      <img data-test="img" src={src} alt={alt} className={isLoaded ? 'loaded' : ''} />
+      <button onClick={onClick} className={isLoaded ? 'loaded' : ''}>
+        <img data-test="img" src={src} alt={alt} />
+      </button>
     </div>
   );
 };
