@@ -1,0 +1,21 @@
+.contImg {
+  position: relative;
+}
+
+.contImg img {
+  width: 100%;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 400ms ease 0ms;
+}
+
+.contImg img.loaded {
+  opacity: 1;
+}
+
+.contImg .loader {
+  left: 50%;
+  opacity: 1;
+  margin-left: -40px;
+  position: absolute;
+}

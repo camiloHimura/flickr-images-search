@@ -3,18 +3,17 @@
   --white: #fff;
   --red: #ed5355;
   --blue: #193847;
-  --gray: #858585;
+  --gray: #485056;
   --orange: #ee8d38;
-  --light-blue: #26566e;
-  --light-gray: #b9b9b9;
+  --light-gray: #dee2e6;
   --light-gray-4: rgba(185, 185, 185, 0.4);
-  --white-6: hsla(0, 0%, 100%, 0.6);
 
   --color-border: var(--light-gray);
   --paragraph-color: #4a4a4a;
 
   --sidebar-width: 20%;
-  --input-radius: 0px;
+  --input-radius: 0.25rem;
+  --gap: 10px;
 }
 
 .flickr {

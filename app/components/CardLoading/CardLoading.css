@@ -1,13 +1,13 @@
 .cardLoading {
   --num-cards: 3;
-  --cards-margin: 10px;
-  --elemts-margin-top: 10px;
+  --cards-margin: var(--gap);
+  --elemts-margin-top: var(--gap);
   --items-color: var(--light-gray-4);
 
   display: flex;
-  padding: 10px;
   font-size: 16px;
   color: var(--gray);
+  padding: var(--gap);
   align-items: center;
   box-sizing: border-box;
   flex-direction: column;

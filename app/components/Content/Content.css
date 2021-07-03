@@ -1,17 +1,12 @@
-.Content {
+.content {
   width: calc(100% - var(--sidebar-width));
   box-sizing: border-box;
-  padding: 20px 20px 20px 0px;
+  padding: calc(var(--gap) * 2);
   margin-left: var(--sidebar-width);
 }
 
-.tagList {
-  margin-top: 4px;
+.content-cards {
   display: flex;
-  flex-direction: row;
-}
-
-.tagList .autoComplete {
-  max-width: 200px;
-  margin-right: 4px;
+  flex-wrap: wrap;
+  margin-top: calc(var(--gap) * 2);
 }
