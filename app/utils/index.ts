@@ -3,6 +3,8 @@ import { KEY_CODES } from '../contans';
 import { iInput } from '../interfaces';
 
 export const isNotEmpty = R.complement(R.isEmpty);
+export const isNotNil = R.complement(R.isNil);
+
 export const getInput = (inputOrEvent: iInput): HTMLInputElement =>
   R.pathOr(R.path(['target'], inputOrEvent), ['current'], inputOrEvent);
 

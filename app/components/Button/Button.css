@@ -1,0 +1,18 @@
+button {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 4px 10px;
+  color: var(--white);
+  border-radius: var(--button-radius);
+  background: var(--blue-2);
+}
+
+button:hover {
+  color: var(--white);
+  background: var(--blue-3);
+}
+
+button:active {
+  background: var(--blue-4);
+}
