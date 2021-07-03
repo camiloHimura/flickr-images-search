@@ -8,8 +8,6 @@ const instance = axios.create({
 });
 instance.interceptors.request.use(
   (req) => {
-    console.log('Sending request...');
-    console.log(`${req.method} ${req.url}`);
     req.params = {
       ...req.params,
       method: API_METHOD,
@@ -18,7 +16,10 @@ instance.interceptors.request.use(
       nojsoncallback: '1',
       format: 'json',
     };
-    console.log('params', req.params);
+    if (req.params.text === '') {
+      req.params.text = '""';
+    }
+
     return req;
   },
   (error) => Promise.reject(error),

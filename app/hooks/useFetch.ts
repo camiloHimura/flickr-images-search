@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as R from 'ramda';
 
 import { photos, stat } from '../interfaces/iFlickrResponse';

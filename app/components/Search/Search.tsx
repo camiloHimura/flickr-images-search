@@ -10,7 +10,7 @@ const Search: React.FC<iSearch> = (props) => {
   const { style = {}, onSearch } = props;
 
   const searchWhenValGreaterThree = R.when(
-    Utils.inputGte(3),
+    R.either(Utils.inputGte(3), ({ target }) => target.value === ''),
     R.useWith(onSearch, [Utils.getInputValue]),
   );
 

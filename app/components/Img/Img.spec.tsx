@@ -24,6 +24,10 @@ describe('Img', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Unreachable code error
     React.useState = (src) => [src, spySetIsLoaded];
+    React.useRef = () => ({
+      current: true,
+      milo: true,
+    });
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Unreachable code error
     global.Image = class Image {

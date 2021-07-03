@@ -13,7 +13,6 @@
 .modal .body {
   position: relative;
   padding: var(--gap);
-  width: var(--modal-container-width);
 }
 
 .modal .close {
