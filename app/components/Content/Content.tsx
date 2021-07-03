@@ -1,26 +1,25 @@
 import React from 'react';
+import Search from '../Search';
 import './Content.css';
-import { iContent, iLink, iTag } from '../../interfaces';
 
 import CardLoading from '../CardLoading';
-import Card from '../Card';
+/* 
+import Card from '../Card'; 
+*/
 
-export enum eContent {
-  tagListClass = 'tagList',
-  tagListPlaceHolder = 'Filter By Tags',
-}
-
-
-/* const CardComponent = (info: iLink) => <Card key={info.id} {...info} data-test="cp-card" />;
 const CardsLoading = (length: number) =>
   Array.from({ length }, (_, index) => (
     <CardLoading key={`cardLoading-${index}`} data-test="cp-cardLoading" />
-  )); */
+  ));
+/* 
+const CardComponent = (info: iLink) => <Card key={info.id} {...info} data-test="cp-card" />;
+*/
 
-const Content: React.FC<iContent> = () => {
+const Content: React.FC = () => {
   return (
     <section className="Content">
-      Content ..... 
+      <Search onSearch={(val) => console.log('val', val)} data-test="cp-search" />
+      {CardsLoading(10)}
     </section>
   );
 };

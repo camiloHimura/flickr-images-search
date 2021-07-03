@@ -16,12 +16,12 @@ const Icon: React.FC<iProps> = React.memo((props) => {
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <i
+      role="img"
+      style={style}
+      data-test="icon"
       onClick={onClick}
       onKeyDown={onClick}
       className={`material-icons ${className} ${color} ${pointer ? 'pointer' : ''}`}
-      style={style}
-      data-test="icon"
-      role="img"
     >
       {name}
     </i>

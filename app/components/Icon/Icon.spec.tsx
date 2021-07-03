@@ -5,16 +5,14 @@ import { shallow } from 'enzyme';
 
 import { findByTestAttr } from '../../utils/test';
 const initialProps = { name: 'test', onClick: jest.fn(), pointer: true };
-let Component;
-beforeEach(() => {
-  Component = setUp();
-});
 
-it('onclick prop is called', () => {
+it('should calle prop onclick', () => {
+  const Component = shallow(<Icon {...initialProps} />);
   findByTestAttr(Component, 'icon').simulate('click');
   expect(initialProps.onClick).toHaveBeenCalledTimes(1);
 });
 
-function setUp(props = {}) {
-  return shallow(<Icon {...initialProps} {...props} />);
-}
+it('onclick include "pointer" class', () => {
+  const Component = shallow(<Icon {...initialProps} />);
+  expect(findByTestAttr(Component, 'icon').prop('className')).toContain('pointer');
+});

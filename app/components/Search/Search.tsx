@@ -1,21 +1,27 @@
 import React from 'react';
-import './Search.css';
 import * as R from 'ramda';
+import './Search.css';
+
 import { iSearch } from '../../interfaces';
-import Input from '../generals/Input';
+import Input from '../Input';
+import * as Utils from '../../utils';
 
 const Search: React.FC<iSearch> = (props) => {
-  const { style = {}, onSearchLink, onGetAllLinks } = props;
+  const { style = {}, onSearch } = props;
 
-  const search = R.ifElse(
-    R.pathSatisfies(Boolean, ['target', 'value']),
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    R.useWith(onSearchLink, [R.path(['target', 'value'])]),
-    () => onGetAllLinks(),
+  const searchWhenValGreaterThree = R.when(
+    Utils.inputGte(3),
+    R.useWith(onSearch, [Utils.getInputValue]),
   );
 
   return (
-    <Input style={style} type="text" placeholder="Search" onInput={search} data-test="cp-input" />
+    <Input
+      style={style}
+      type="text"
+      placeholder="Search"
+      onInput={searchWhenValGreaterThree}
+      data-test="cp-input"
+    />
   );
 };
 

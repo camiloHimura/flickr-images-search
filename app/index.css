@@ -5,7 +5,7 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #e6e6e6;
+  background: #f8f9fa;
 }
 
 h1,
@@ -40,7 +40,6 @@ p {
   -webkit-font-smoothing: antialiased;
   color: #858585;
 }
-
 
 .button {
   padding: 10px;

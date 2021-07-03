@@ -4,31 +4,26 @@ import { shallow } from 'enzyme';
 import Search from './Search';
 import { iSearch } from '../../interfaces';
 import { findByTestAttr } from '../../utils/test';
+import { mocked } from 'ts-jest/utils';
 
-const onSearchLink = jest.fn();
-const onGetAllLinks = jest.fn();
-let spyObj: iSearch = {
-  onSearchLink,
-  onGetAllLinks,
+const defaultProps: iSearch = {
+  style: {},
+  onSearch: jest.fn(),
 };
 let component;
 
 beforeEach(() => {
-  spyObj = {
-    onSearchLink: jest.fn(),
-    onGetAllLinks: jest.fn(),
-  };
-  component = shallow(<Search {...spyObj} />);
+  mocked(defaultProps.onSearch);
 });
 
-test('Shoud call onGetAllLinks', () => {
+it('Should not call onSearch, input value length is not equal or greater than 3', () => {
+  component = shallow(<Search {...defaultProps} />);
   findByTestAttr(component, 'cp-input').simulate('input', { target: { value: '' } });
-  expect(spyObj.onGetAllLinks).toHaveBeenCalled();
+  expect(defaultProps.onSearch).not.toHaveBeenCalled();
 });
 
-test('Shoud call onSearchLink', () => {
-  ['test', '0', 'false'].forEach((value) => {
-    findByTestAttr(component, 'cp-input').simulate('input', { target: { value } });
-    expect(spyObj.onSearchLink).toHaveBeenCalledWith(value);
-  });
+it('Should call onSearch, input value length is equal or greater than 3', () => {
+  component = shallow(<Search {...defaultProps} />);
+  findByTestAttr(component, 'cp-input').simulate('input', { target: { value: 'tes' } });
+  expect(defaultProps.onSearch).toHaveBeenCalled();
 });

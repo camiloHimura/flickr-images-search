@@ -13,12 +13,11 @@
   --color-border: var(--light-gray);
   --paragraph-color: #4a4a4a;
 
-  --sidebar-width: 30%;
-  --sideBarOptions-width: 50px;
+  --sidebar-width: 20%;
   --input-radius: 0px;
 }
 
-.MyFavorites {
+.flickr {
   display: flex;
   font-size: 12px;
   flex-wrap: wrap;
@@ -49,16 +48,6 @@ button {
   cursor: pointer;
 }
 
-.invalid {
-  border: 1px solid var(--red);
-}
-
-.--ellipsis {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 .pointer {
   cursor: pointer;
 }
@@ -68,4 +57,17 @@ button {
   color: var(--blue);
   text-align: center;
   text-transform: capitalize;
+}
+
+.sideBar {
+  --margin-right: 10px;
+
+  display: flex;
+  position: fixed;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin-right: var(--margin-right);
+  border-right: 1px solid var(--light-gray);
+  width: calc(var(--sidebar-width) - var(--margin-right));
 }
