@@ -7,13 +7,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0477bf66;
+  background: var(--bg-modal);
 }
 
 .modal .body {
   position: relative;
   padding: var(--gap);
-  background: var(--white);
   width: var(--modal-container-width);
 }
 
@@ -22,4 +21,5 @@
   position: absolute;
   top: calc(var(--gap) / 2);
   right: calc(var(--gap) / 2);
+  background: white;
 }

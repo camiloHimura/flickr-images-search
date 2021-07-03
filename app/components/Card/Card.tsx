@@ -4,6 +4,7 @@ import Img from '../Img';
 import './Card.css';
 import iPhoto from '../../interfaces/iPhoto';
 import Modal from '../Modal';
+import DetectionLayer from '../DetectionLayer';
 
 type Props = iPhoto;
 
@@ -20,7 +21,7 @@ const Card: React.FC<Props> = ({ title, id, secret, server }) => {
       />
       <h3 className="card-title">{title}</h3>
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <div>Modal test</div>
+        <DetectionLayer imgUrl={`https://live.staticflickr.com/${server}/${id}_${secret}_c.jpg`} />
       </Modal>
     </div>
   );
