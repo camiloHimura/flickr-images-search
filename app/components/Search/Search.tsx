@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import * as R from 'ramda';
 import './Search.css';
 
 import { iSearch } from '../../interfaces';
@@ -10,18 +11,18 @@ const Search: React.FC<iSearch> = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
+  const inputHandler = R.pipe(R.path(['target', 'value']), setSearchTerm);
+
   useEffect(() => {
-    if (debouncedSearchTerm) {
-      onSearch(debouncedSearchTerm);
-    }
+    onSearch(debouncedSearchTerm);
   }, [debouncedSearchTerm]);
 
   return (
     <Input
-      style={style}
       type="text"
+      style={style}
       placeholder="Search"
-      onInput={(event) => setSearchTerm(event.target.value)}
+      onInput={inputHandler}
       data-test="cp-input"
     />
   );

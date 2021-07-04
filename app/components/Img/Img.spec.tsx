@@ -3,6 +3,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Img from './Img';
 import { findByTestAttr } from '../../utils/test';
+import { ImgLoader } from '../../utils/ImgLoader';
+import { mocked } from 'ts-jest/utils';
+jest.mock('../../utils/ImgLoader');
 
 const initialProps = {
   src: '',
@@ -19,30 +22,21 @@ describe('Img', () => {
     expect(loader).toHaveLength(1);
   });
 
-  it('state updated after loading the image', (done) => {
+  it('state updated after loading the image', () => {
     const spySetIsLoaded = jest.fn();
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Unreachable code error
     React.useState = (src) => [src, spySetIsLoaded];
     React.useRef = () => ({
       current: true,
-      milo: true,
     });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore: Unreachable code error
-    global.Image = class Image {
-      constructor() {
-        setTimeout(() => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore: Unreachable code error
-          this.onload();
-          expect(spySetIsLoaded).toHaveBeenCalledWith(true);
-          done();
-        }, 0);
-      }
-    };
+
+    mocked(ImgLoader).mockImplementationOnce((_imgUrl, callbak) => {
+      callbak(new Image());
+    });
 
     component = setUp({ src: 'test Value' });
+    expect(spySetIsLoaded).toHaveBeenCalledWith(true);
   });
 });
 

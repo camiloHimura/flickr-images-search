@@ -3,32 +3,38 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { mocked } from 'ts-jest/utils';
 
-import Card from './CardContainer';
+import CardContainer from './CardContainer';
+import { findByTestAttr } from '../../utils/test';
 
-const defaultProps = {
-  imgUrl: 'urlTest',
-  title: 'title test',
-  onClick: jest.fn(),
+const photo = (id: string) => ({
+  id,
+  farm: 0,
+  isfamily: 0,
+  isfriend: 0,
+  ispublic: 0,
+  owner: 'ownerTest',
+  secret: 'secretTest',
+  server: 'serverTest',
+  title: 'titleTest',
+});
+
+const onLoadMore = {
+  data: Array.from({ length: 10 }, (_, index) => photo(`${index}`)),
+  onLoadMore: jest.fn(),
 };
 
 beforeEach(() => {
-  mocked(defaultProps.onClick).mockReset();
+  mocked(onLoadMore.onLoadMore).mockReset();
 });
 
-it('Should call onClick prop if the target is an IMG element', () => {
+it('Should render loadMore div', () => {
   const component = setUp();
-  const newImage = new Image();
-  component.simulate('click', { target: newImage });
-  expect(defaultProps.onClick).toHaveBeenNthCalledWith(1, newImage);
+  expect(findByTestAttr(component, 'loadMore')).toHaveLength(1);
 });
 
-it('Should not call onClick if the target is different to an IMG element', () => {
+it('Should render Card component', () => {
   const component = setUp();
-
-  ['div', 'p', 'span'].forEach((tagname) => {
-    component.simulate('click', { target: document.createElement(tagname) });
-    expect(defaultProps.onClick).not.toHaveBeenCalled();
-  });
+  expect(findByTestAttr(component, 'cp-card')).toHaveLength(onLoadMore.data.length);
 });
 
-const setUp = () => shallow(<Card {...defaultProps} />);
+const setUp = () => shallow(<CardContainer {...onLoadMore} />);

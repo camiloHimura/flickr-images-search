@@ -15,12 +15,14 @@ const Content: React.FC = () => {
   const [params, setParams] = useState({ text: '', page: 1 });
   const { data, isLoading } = useFetch(params);
 
+  const isLoadingOrEmpty = isLoading || data.length === 0;
+
   return (
     <section className="content">
       <Search onSearch={(text) => setParams({ page: 1, text })} data-test="cp-search" />
 
       <div className="content-cards">
-        {isLoading && CardsLoading(9)}
+        {isLoadingOrEmpty && CardsLoading(9)}
         {!isLoading && (
           <CardContainer
             data={data}

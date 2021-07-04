@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
+import { ImgLoader } from '../../utils/ImgLoader';
 import Loader from '../Loader';
 import './DetectionLayer.css';
-
 interface Props {
   imgUrl: string;
 }
 
 declare const cv: any;
 
-const setCanny = (iImage: HTMLImageElement, callback: () => void) => () => {
+const setCanny = (callback) => (iImage: HTMLImageElement) => {
   const mat = cv.imread(iImage);
   const dst = new cv.Mat();
   cv.cvtColor(mat, mat, cv.COLOR_RGB2GRAY, 0);
@@ -16,7 +16,6 @@ const setCanny = (iImage: HTMLImageElement, callback: () => void) => () => {
   cv.imshow('canvasOutput', dst);
   mat.delete();
   dst.delete();
-
   callback();
 };
 
@@ -24,10 +23,10 @@ export const DetectionLayer: React.FC<Props> = ({ imgUrl }) => {
   const [isLoading, setLoading] = React.useState(true);
 
   useEffect(() => {
-    const iImage = new Image();
-    iImage.src = imgUrl;
-    iImage.crossOrigin = 'Anonymous';
-    iImage.onload = setCanny(iImage, () => setLoading(false));
+    ImgLoader(
+      imgUrl,
+      setCanny(() => setLoading(false)),
+    );
   }, [imgUrl]);
 
   return (

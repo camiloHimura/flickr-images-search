@@ -23,10 +23,10 @@ const CardContainer: React.FC<Props> = ({ data, onLoadMore }) => {
   return (
     <Fragment>
       {data?.map((pto) => (
-        <Card key={pto.id} {...pto} />
+        <Card key={pto.id} {...pto} data-test="cp-card" />
       ))}
 
-      <div className="loadMore" ref={ref}></div>
+      <div className="loadMore" ref={ref} data-test="loadMore"></div>
     </Fragment>
   );
 };

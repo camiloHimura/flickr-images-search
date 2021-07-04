@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import Loader from '../Loader';
+import { ImgLoader } from '../../utils/ImgLoader';
 import './Img.css';
 
 interface Props {
@@ -20,15 +21,12 @@ const Img: React.FC<Props> = ({ src, alt, onClick }) => {
   }, []);
 
   React.useEffect(() => {
-    const iImage = new Image();
-    iImage.src = src;
-    iImage.onload = () => {
+    ImgLoader(src, (iImage) => {
       if (componentIsMounted.current) {
         setIsLoaded(true);
         setAspectRatio(`${(iImage.naturalHeight / iImage.naturalWidth) * 100}%`);
       }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    });
   }, [src]);
 
   return (

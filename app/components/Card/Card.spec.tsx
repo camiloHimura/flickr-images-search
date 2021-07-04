@@ -1,33 +1,65 @@
 import 'jsdom-global/register';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { mocked } from 'ts-jest/utils';
 
 import Card from './Card';
+import iPhoto from '../../interfaces/iPhoto';
+import { findByTestAttr } from '../../utils/test';
 
-const defaultProps = {
-  imgUrl: 'urlTest',
-  title: 'title test',
-  onClick: jest.fn(),
+const defaultProps: iPhoto = {
+  id: 'idTest',
+  farm: 0,
+  isfamily: 0,
+  isfriend: 0,
+  ispublic: 0,
+  owner: 'ownerTest',
+  secret: 'secretTest',
+  server: 'serverTest',
+  title: 'titleTest',
 };
 
-beforeEach(() => {
-  mocked(defaultProps.onClick).mockReset();
-});
+describe('Card', () => {
+  const spySetShowModal = jest.fn();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore: Unreachable code error
+  React.useState = (src) => [src, spySetShowModal];
 
-it('Should call onClick prop if the target is an IMG element', () => {
-  const component = setUp();
-  const newImage = new Image();
-  component.simulate('click', { target: newImage });
-  expect(defaultProps.onClick).toHaveBeenNthCalledWith(1, newImage);
-});
+  beforeEach(() => {
+    spySetShowModal.mockRestore();
+  });
 
-it('Should not call onClick if the target is different to an IMG element', () => {
-  const component = setUp();
+  it('Should Img component with the photo config and small resolution "q" ', () => {
+    const component = setUp();
 
-  ['div', 'p', 'span'].forEach((tagname) => {
-    component.simulate('click', { target: document.createElement(tagname) });
-    expect(defaultProps.onClick).not.toHaveBeenCalled();
+    expect(findByTestAttr(component, 'cp-img').prop('src')).toBe(
+      `https://live.staticflickr.com/${defaultProps.server}/${defaultProps.id}_${defaultProps.secret}_q.jpg`,
+    );
+  });
+
+  it('Img onClick should call setShowModal true', () => {
+    const component = setUp();
+
+    const onClick = findByTestAttr(component, 'cp-img').prop('onClick') as () => void;
+    onClick();
+
+    expect(spySetShowModal).toHaveBeenCalledWith(true);
+  });
+
+  it('Should detectionLayer component with the photo config and medium resolution "c"', () => {
+    const component = setUp();
+
+    expect(findByTestAttr(component, 'cp-detectionLayer').prop('imgUrl')).toBe(
+      `https://live.staticflickr.com/${defaultProps.server}/${defaultProps.id}_${defaultProps.secret}_c.jpg`,
+    );
+  });
+
+  it('Modal onClose should call setShowModal false', () => {
+    const component = setUp();
+
+    const onClick = findByTestAttr(component, 'cp-modal').prop('onClose') as () => void;
+    onClick();
+
+    expect(spySetShowModal).toHaveBeenCalledWith(false);
   });
 });
 
