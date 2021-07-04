@@ -1,6 +1,10 @@
 .content {
-  width: calc(100% - var(--sidebar-width));
   box-sizing: border-box;
   padding: calc(var(--gap) * 2);
-  margin-left: var(--sidebar-width);
+}
+
+.content-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--gap) * 2);
 }

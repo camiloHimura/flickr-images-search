@@ -1,29 +1,33 @@
-import React from 'react';
-import * as Utils from '../../utils';
-import useFetch from '../../hooks/useFetch';
+import React, { Fragment, useLayoutEffect, useRef } from 'react';
 import './CardContainer.css';
 
 import Card from '../Card';
-import CardLoading from '../CardLoading';
+import useIntersectionObserver from '../../hooks/useOnScreen';
+import iPhoto from '../../interfaces/iPhoto';
 
 interface Props {
-  searchText: string;
+  data: iPhoto[];
+  onLoadMore: () => void;
 }
 
-const CardsLoading = (length: number) =>
-  Array.from({ length }, (_, index) => (
-    <CardLoading key={`cardLoading-${index}`} data-test="cp-cardLoading" />
-  ));
+const CardContainer: React.FC<Props> = ({ data, onLoadMore }) => {
+  const ref = useRef();
+  const loadMore = useIntersectionObserver(ref, { threshold: 0 }, false);
 
-const CardContainer: React.FC<Props> = ({ searchText = '"' }) => {
-  const { data, isLoading } = useFetch({ text: searchText, page: 0 });
+  useLayoutEffect(() => {
+    if (loadMore) {
+      onLoadMore();
+    }
+  }, [loadMore]);
 
   return (
-    <div className="cardContainer">
-      {isLoading && CardsLoading(9)}
+    <Fragment>
+      {data?.map((pto) => (
+        <Card key={pto.id} {...pto} />
+      ))}
 
-      {Utils.isNotNil(data) && data.photo.map((pto) => <Card key={pto.id} {...pto} />)}
-    </div>
+      <div className="loadMore" ref={ref}></div>
+    </Fragment>
   );
 };
 

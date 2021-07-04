@@ -3,15 +3,32 @@ import './Content.css';
 
 import Search from '../Search';
 import CardContainer from '../CardContainer';
+import useFetch from '../../hooks/useFetch';
+import CardLoading from '../CardLoading';
+
+const CardsLoading = (length: number) =>
+  Array.from({ length }, (_, index) => (
+    <CardLoading key={`cardLoading-${index}`} data-test="cp-cardLoading" />
+  ));
 
 const Content: React.FC = () => {
-  const [searchText, setSearchText] = useState('');
+  const [params, setParams] = useState({ text: '', page: 1 });
+  const { data, isLoading } = useFetch(params);
 
   return (
     <section className="content">
-      <Search onSearch={setSearchText} data-test="cp-search" />
+      <Search onSearch={(text) => setParams({ page: 1, text })} data-test="cp-search" />
 
-      <CardContainer searchText={searchText} data-test="cp-cardContainer" />
+      <div className="content-cards">
+        {isLoading && CardsLoading(9)}
+        {!isLoading && (
+          <CardContainer
+            data={data}
+            data-test="cp-cardContainer"
+            onLoadMore={() => setParams((params) => ({ ...params, page: params.page + 1 }))}
+          />
+        )}
+      </div>
     </section>
   );
 };

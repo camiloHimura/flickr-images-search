@@ -1,28 +1,45 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import * as R from 'ramda';
 
-import { photos, stat } from '../interfaces/iFlickrResponse';
+import { stat } from '../interfaces/iFlickrResponse';
 import iQuery from '../interfaces/iQuery';
 import instance from '../utils/axios.conf';
+import iPhoto from '../interfaces/iPhoto';
 
 interface response {
-  data: null | photos;
+  data: iPhoto[];
   isLoading: boolean;
   error: null | string;
 }
 
 export const useFetch: (params: iQuery) => response = (params) => {
   const [state, setState] = useState({
-    data: null,
+    data: [],
     isLoading: false,
     error: null,
   });
 
-  const setError = () => setState({ data: null, isLoading: false, error: true });
-
+  const setError = () => setState({ data: [], isLoading: false, error: true });
+  /*   const setPhotos = R.pipe(
+    R.path(['data', 'photos', 'photo']), (photo) =>
+    setState((prev) => ({
+      data: R.concat(prev.data, data.photos.photo),
+      isLoading: false,
+      error: null,
+    })),
+  ); */
   const isValidResponse = R.ifElse(
     R.pathEq(['data', 'stat'], stat.ok),
-    ({ data }) => setState({ data: data.photos, isLoading: false, error: null }),
+    ({ data }) =>
+      setState((prev) => {
+        console.log('prev', prev.data);
+        console.log('data.photos.photo', data.photos.photo);
+        return {
+          data: R.concat(prev.data, data.photos.photo),
+          isLoading: false,
+          error: null,
+        };
+      }),
     setError,
   );
 
@@ -33,11 +50,12 @@ export const useFetch: (params: iQuery) => response = (params) => {
   );
 
   useEffect(() => {
-    setState({ data: null, isLoading: true, error: null });
-    console.log(params);
+    if (params.page === 1) {
+      setState({ data: [], isLoading: true, error: null });
+    }
+    console.log('===> params', params);
     getPhotos({ params });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.text]);
+  }, [params.text, params.page]);
 
   return state;
 };

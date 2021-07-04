@@ -1,5 +1,2 @@
 .cardContainer {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--gap) * 2);
 }

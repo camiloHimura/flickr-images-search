@@ -13,12 +13,22 @@
 .modal .body {
   position: relative;
   padding: var(--gap);
+  width: calc(100% - 40px);
 }
 
 .modal .close {
-  color: var(--black);
+  top: -10px;
+  right: -10px;
+  cursor: pointer;
+  font-size: 30px;
+  color: var(--white);
   position: absolute;
-  top: calc(var(--gap) / 2);
-  right: calc(var(--gap) / 2);
-  background: white;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 20px 3px var(--black);
+}
+
+@media only screen and (min-width: 768px) {
+  .modal .body {
+    width: auto;
+  }
 }

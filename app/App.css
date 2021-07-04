@@ -11,9 +11,9 @@
   --color-border: var(--light-gray);
   --paragraph-color: #4a4a4a;
 
-  --sidebar-width: 20%;
-  --input-radius: 0.25rem;
   --gap: 10px;
+  --num-cards: 2;
+  --input-radius: 0.25rem;
   --bg-modal: #0477bf66;
   --modal-container-width: 80vw;
 }
@@ -60,15 +60,26 @@ button {
   text-transform: capitalize;
 }
 
-.sideBar {
-  --margin-right: 10px;
-
-  display: flex;
-  position: fixed;
-  height: 100vh;
+.--ellipsis {
   overflow: hidden;
-  box-sizing: border-box;
-  margin-right: var(--margin-right);
-  border-right: 1px solid var(--light-gray);
-  width: calc(var(--sidebar-width) - var(--margin-right));
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (min-width: 768px) {
+  :root {
+    --num-cards: 4;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  :root {
+    --num-cards: 6;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  :root {
+    --num-cards: 8;
+  }
 }

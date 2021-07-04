@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import './Modal.css';
 
 import useClickOutside from '../../hooks/useClickOutside';
-import Button from '../Button/Button';
+import Icon from '../Icon';
 
 interface Props {
   show: boolean;
@@ -18,7 +18,7 @@ export const Modal: React.FC<Props> = ({ show, onClose, children }) => {
   let Component = (
     <div className="modal">
       <div className="body" ref={ref}>
-        <Button text="X" className="close" onClick={onClose} data-test="cp-close" />
+        <Icon name="cancel" className="close" onClick={onClose} data-test="cp-close" />
         {children}
       </div>
     </div>

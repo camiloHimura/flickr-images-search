@@ -1,5 +1,4 @@
 .card {
-  --num-cards: 4;
   --icon-size: 18px;
   --cards-margin: var(--gap);
   --elemts-margin-top: var(--gap);
@@ -31,4 +30,5 @@
   font-size: 14px;
   font-weight: normal;
   margin-top: var(--gap);
+  word-break: break-word;
 }

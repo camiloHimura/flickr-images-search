@@ -1,25 +1,27 @@
-import React from 'react';
-import * as R from 'ramda';
+import React, { useEffect, useState } from 'react';
 import './Search.css';
 
 import { iSearch } from '../../interfaces';
 import Input from '../Input';
-import * as Utils from '../../utils';
+import useDebounce from '../../hooks/useDebounce';
 
 const Search: React.FC<iSearch> = (props) => {
   const { style = {}, onSearch } = props;
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  const searchWhenValGreaterThree = R.when(
-    R.either(Utils.inputGte(3), ({ target }) => target.value === ''),
-    R.useWith(onSearch, [Utils.getInputValue]),
-  );
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      onSearch(debouncedSearchTerm);
+    }
+  }, [debouncedSearchTerm]);
 
   return (
     <Input
       style={style}
       type="text"
       placeholder="Search"
-      onInput={searchWhenValGreaterThree}
+      onInput={(event) => setSearchTerm(event.target.value)}
       data-test="cp-input"
     />
   );
