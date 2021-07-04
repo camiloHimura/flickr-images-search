@@ -8,13 +8,11 @@
     "start": "npm run server",
     "start:dev": "webpack serve --config webpack.dev.js",
     "start:prod": "webpack serve --config webpack.prod.js",
-    "server": "node server/index.js",
     "build": "webpack --progress --config webpack.dev.js",
     "build:prod": "webpack --progress --config webpack.prod.js",
     "test": "jest --config ./jest.config.json",
     "test:watch": "npm run test -- --watchAll",
     "format": "prettier --write .",
-    "heroku-postbuild": "npm run build:prod",
     "prepare": "husky install"
   },
   "lint-staged": {

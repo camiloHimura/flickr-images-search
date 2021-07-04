@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Search from './Search';
-import { iSearch } from '../../interfaces';
 import { findByTestAttr } from '../../utils/test';
 import { mocked } from 'ts-jest/utils';
+import iSearch from '../../interfaces/iSearch';
 
 const defaultProps: iSearch = {
   style: {},

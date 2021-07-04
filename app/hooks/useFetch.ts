@@ -20,20 +20,10 @@ export const useFetch: (params: iQuery) => response = (params) => {
   });
 
   const setError = () => setState({ data: [], isLoading: false, error: true });
-  /*   const setPhotos = R.pipe(
-    R.path(['data', 'photos', 'photo']), (photo) =>
-    setState((prev) => ({
-      data: R.concat(prev.data, data.photos.photo),
-      isLoading: false,
-      error: null,
-    })),
-  ); */
   const isValidResponse = R.ifElse(
     R.pathEq(['data', 'stat'], stat.ok),
     ({ data }) =>
       setState((prev) => {
-        console.log('prev', prev.data);
-        console.log('data.photos.photo', data.photos.photo);
         return {
           data: R.concat(prev.data, data.photos.photo),
           isLoading: false,
@@ -53,7 +43,7 @@ export const useFetch: (params: iQuery) => response = (params) => {
     if (params.page === 1) {
       setState({ data: [], isLoading: true, error: null });
     }
-    console.log('===> params', params);
+
     getPhotos({ params });
   }, [params.text, params.page]);
 

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import * as R from 'ramda';
 import './Search.css';
 
-import { iSearch } from '../../interfaces';
 import Input from '../Input';
 import useDebounce from '../../hooks/useDebounce';
+import iSearch from '../../interfaces/iSearch';
 
 const Search: React.FC<iSearch> = (props) => {
   const { style = {}, onSearch } = props;

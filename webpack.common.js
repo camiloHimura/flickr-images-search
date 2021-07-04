@@ -39,8 +39,11 @@ module.exports = {
       template: 'app/index.html',
     }),
     new webpack.DefinePlugin({
-      'process.env.PORT': JSON.stringify(process.env.PORT),
+      'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
+      'process.env.API_METHOD': JSON.stringify(process.env.API_METHOD),
+      'process.env.API_TIMEOUT': JSON.stringify(process.env.API_TIMEOUT),
+      'process.env.FLICKR_API_SIG': JSON.stringify(process.env.FLICKR_API_SIG),
     }),
   ],
 };
