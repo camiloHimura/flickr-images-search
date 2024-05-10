@@ -1,4 +1,4 @@
-import { ERROR_TYPES, ERROR_MESSAGES } from '../contans';
+import { ERROR_TYPES, ERROR_MESSAGES } from '../constans';
 
 export default function catchError(error: Error): void {
   // const parseError = JSON.parse(JSON.stringify(error));

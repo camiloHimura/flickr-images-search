@@ -20,9 +20,11 @@ export const useFetch: (params: iQuery) => response = (params) => {
   });
 
   const setError = () => setState({ data: [], isLoading: false, error: true });
+  
+
   const isValidResponse = R.ifElse(
-    R.pathEq(['data', 'stat'], stat.ok),
-    ({ data }) =>
+    R.pathEq(stat.ok, ['data', 'stat']),
+    ({data}) =>  
       setState((prev) => {
         return {
           data: R.concat(prev.data, data.photos.photo),

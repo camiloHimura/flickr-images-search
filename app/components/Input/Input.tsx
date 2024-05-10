@@ -7,9 +7,9 @@ interface iProps {
   'data-test'?: string;
   placeholder?: string;
   type?: 'search' | 'text';
-  onInput?: R.Arity1Fn | (() => any);
-  onChange?: R.Arity1Fn | (() => any);
-  onFocus?: R.Arity1Fn | (() => any);
+  onInput?: ((data: unknown) => void);
+  onChange?: ((data: unknown) => void);
+  onFocus?: ((data: unknown) => void);
 }
 
 const Input: React.FC<iProps & RefAttributes<HTMLInputElement>> = React.forwardRef((props, ref) => {

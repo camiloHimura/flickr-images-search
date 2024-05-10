@@ -1,7 +1,6 @@
 import 'jsdom-global/register';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { mocked } from 'ts-jest/utils';
 
 import CardContainer from './CardContainer';
 import { findByTestAttr } from '../../utils/test';
@@ -24,7 +23,7 @@ const onLoadMore = {
 };
 
 beforeEach(() => {
-  mocked(onLoadMore.onLoadMore).mockReset();
+  jest.mocked(onLoadMore.onLoadMore).mockReset();
 });
 
 it('Should render loadMore div', () => {

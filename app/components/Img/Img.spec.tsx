@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import Img from './Img';
 import { findByTestAttr } from '../../utils/test';
 import { ImgLoader } from '../../utils/ImgLoader';
-import { mocked } from 'ts-jest/utils';
 jest.mock('../../utils/ImgLoader');
 
 const initialProps = {
@@ -31,7 +30,7 @@ describe('Img', () => {
       current: true,
     });
 
-    mocked(ImgLoader).mockImplementationOnce((_imgUrl, callbak) => {
+    jest.mocked(ImgLoader).mockImplementationOnce((_imgUrl, callbak) => {
       callbak(new Image());
     });
 

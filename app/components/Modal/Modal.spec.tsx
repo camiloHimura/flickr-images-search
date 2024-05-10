@@ -3,7 +3,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { findByTestAttr } from '../../utils/test';
 import Modal from './Modal';
-import { mocked } from 'ts-jest/utils';
 
 const initialProps = {
   show: false,
@@ -12,7 +11,7 @@ const initialProps = {
 
 describe('Modal', () => {
   beforeEach(() => {
-    mocked(initialProps.onClose).mockRestore();
+    jest.mocked(initialProps.onClose).mockRestore();
   });
 
   it('should render null', () => {

@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 
 import Search from './Search';
 import { findByTestAttr } from '../../utils/test';
-import { mocked } from 'ts-jest/utils';
 import iSearch from '../../interfaces/iSearch';
 
 const defaultProps: iSearch = {
@@ -13,7 +12,7 @@ const defaultProps: iSearch = {
 let component;
 
 beforeEach(() => {
-  mocked(defaultProps.onSearch).mockRestore();
+  jest.mocked(defaultProps.onSearch).mockRestore();
 });
 
 it('Should call SetSearchTerm when the input changes', () => {

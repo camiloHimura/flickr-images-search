@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL, API_TIMEOUT, API_KEY, FLICKR_API_SIG, API_METHOD } from '../contans';
+import { API_URL, API_TIMEOUT, API_KEY, FLICKR_API_SIG, API_METHOD } from '../constans';
 
 const instance = axios.create({
   baseURL: API_URL,
@@ -16,7 +16,8 @@ instance.interceptors.request.use(
       nojsoncallback: '1',
       format: 'json',
     };
-    if (req.params.text === '') {
+
+    if (req.params?.text === '') {
       req.params.text = '""';
     }
 

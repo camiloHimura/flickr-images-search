@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import { findByTestAttr } from '../../utils/test';
 import DetectionLayer from './DetectionLayer';
 import { ImgLoader } from '../../utils/ImgLoader';
-import { mocked } from 'ts-jest/utils';
 
 const spySetLoading = jest.fn(() => true);
 
@@ -41,7 +40,7 @@ describe('Img', () => {
 
   it('should render Loader, canvas is hidden', () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    mocked(ImgLoader).mockImplementationOnce(() => {});
+    jest.mocked(ImgLoader).mockImplementationOnce(() => {});
     const component = setUp();
     const loader = findByTestAttr(component, 'cp-loader');
     expect(loader).toHaveLength(1);
@@ -49,7 +48,7 @@ describe('Img', () => {
   });
 
   it('should call setLoading false after loading the image', () => {
-    mocked(ImgLoader).mockImplementationOnce((_imgUrl, callbak) => {
+    jest.mocked(ImgLoader).mockImplementationOnce((_imgUrl, callbak) => {
       callbak(new Image());
     });
     const spySetIsLoaded = jest.fn();

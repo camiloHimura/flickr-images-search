@@ -14,7 +14,6 @@ const CardsLoading = (length: number) =>
 const Content: React.FC = () => {
   const [params, setParams] = useState({ text: '', page: 1 });
   const { data, isLoading } = useFetch(params);
-
   const isLoadingOrEmpty = isLoading || data.length === 0;
 
   return (

@@ -1,4 +1,4 @@
-import { LSTORAGE_INVALID_KEY } from '../contans/ErrorMessages';
+import { LSTORAGE_INVALID_KEY } from '../constans/ErrorMessages';
 
 function checkKey(key) {
   if (!isString(key)) {
